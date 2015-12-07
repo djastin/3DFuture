@@ -1,5 +1,9 @@
 package views.core.graphics;
 
+import java.awt.Dimension;
+
+import views.core.graphics.components.Floor;
+
 public class Render3D extends Render
 {
 	public Render3D(int width, int height) 
@@ -7,28 +11,10 @@ public class Render3D extends Render
 		super(width, height);
 	}
 	
-	public void floor()
+	public void build()
 	{
-		for(int y = 0; y < height; y++)
-		{
-			double yDepth = y - height / 2.4;
-			double z = 100.0 / yDepth;
-			
-			for(int x = 0; x < width; x++)
-			{
-				double xDepth = x - width / 2; 
-				xDepth *= z;
-				
-				/* & = AND bitwise operator
-				 * << = shift left operator
-				 * >> = shift right operator
-				 * 
-				 * */
-				
-				int xx = (int) (xDepth) & 5;
-				pixels[x+y * width] = xx * 128; 
-			}
-		}
+		Floor floor = new Floor(new Dimension(width, height), pixels);
+		floor.build();
 	}
 
 }
