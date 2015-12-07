@@ -5,11 +5,12 @@ public class Render
 	public final int width;
 	public final int height;
 	public final int[] pixels;
-	
+		
 	public Render(int width, int height)
 	{
 		this.width = width;
 		this.height = height;
+		
 		pixels = new int[width * height];
 	}
 	
@@ -19,11 +20,20 @@ public class Render
 		{
 			int yPix = y + yOffset;
 			
+			if(yPix < 0 || yPix >= height)
+				continue;
+			
 			for(int x = 0; x < render.width; x++)
 			{
 				int xPix = x + xOffset;
 				
-				pixels[xPix + yPix * width] = render.pixels[x + y + render.width];
+				if(xPix < 0 || xPix >= width)
+					continue;
+				
+				int alpha = render.pixels[x + y * render.width];
+				
+				if(alpha > 0) /* it enables to get void pixels; pixels with no data */
+					pixels[xPix + yPix * width] = alpha;
 			}
 		}
 	}

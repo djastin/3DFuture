@@ -21,7 +21,6 @@ public class Dashboard extends JFrame
 		add(display);
 		pack();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(display.getWidth(), display.getHeight());
 		setResizable(false);
 		
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
