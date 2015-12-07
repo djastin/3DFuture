@@ -17,13 +17,13 @@ public class Floor
 	{
 		for(int y = 0; y < dimension.height; y++)
 		{
-			double yDepth = y - dimension.height / 2.4;
-			double z = 100.0 / yDepth;
+			double ceiling = (y - dimension.height / 2.0) / dimension.height;
+			double z = 2 / ceiling;
 			
 			for(int x = 0; x < dimension.width; x++)
 			{
-				double xDepth = x - dimension.width / 2;  
-				xDepth *= z;
+				double depth = (x - dimension.width / 2) / dimension.height;  
+				depth *= z;
 							
 				/* & = AND bitwise operator
 				 * << = shift left operator
@@ -31,8 +31,9 @@ public class Floor
 				 * 
 				 * */
 				
-				int xx = (int) (xDepth) & 5;
-				pixels[x+y * dimension.width] = xx * 128; 
+				int xx = (int) (depth) & 5;
+				int yy = (int) (z) & 5;
+				pixels[x+y * dimension.width] = (xx * 16) | (yy * 16) * 64; 
 			}
 		}
 	}
